@@ -27,6 +27,7 @@ let darkMode = false;
 
 // Event Listeners on submit button 
 btnsubmit.addEventListener("click", function () {
+  // if input bar is non-empty then call if  we hit without data then call will not go
   if (input.value !== "") {
     getUserData(url + input.value);
   }
@@ -35,10 +36,13 @@ btnsubmit.addEventListener("click", function () {
 // if we hit enter then 
 input.addEventListener(
   "keydown",
+
   function (e) {
     if (!e) {
       var e = window.event;
     }
+
+    // if input field is non empty then fetch user data
     if (e.key == "Enter") {
       if (input.value !== "") {
         getUserData(url + input.value);
@@ -51,7 +55,9 @@ input.addEventListener(
 
 // hide "no search result" when we search  
 input.addEventListener("input", function () {
+  // hide "no search result" text
   noresults.style.display = "none";
+
   profilecontainer.classList.remove("active");
   searchbar.classList.add("active");
 });
@@ -73,6 +79,7 @@ function getUserData(gitUrl) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
+      // send the data for rendering
       updateProfile(data);
     })
     .catch((error) => {
@@ -80,7 +87,7 @@ function getUserData(gitUrl) {
     });
 }
 
-
+// render the  github profile data 
 function updateProfile(data) {
   if (data.message !== "Not Found") {
     noresults.style.display = "none";
@@ -119,14 +126,18 @@ function updateProfile(data) {
 //dark mode default
 const prefersDarkMode = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 const localStorageDarkMode = localStorage.getItem("daresfesf");
+
 if (localStorageDarkMode === null) {
   localStorage.setItem("dark-mode", prefersDarkMode);
   darkMode = prefersDarkMode;
 }
+
 if (localStorageDarkMode) {
   darkMode = localStorageDarkMode;
   darkModeProperties();
-} else {
+} 
+else 
+{
   localStorage.setItem("dark-mode", prefersDarkMode);
   darkMode = prefersDarkMode;
   lightModeProperties();
