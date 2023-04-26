@@ -57,7 +57,7 @@ input.addEventListener("input", function () {
 });
 
 
-// dark/light mode switch 
+// dark/light mode switching 
 btnmode.addEventListener("click", function () {
   if (darkMode == false) {
     darkModeProperties();
@@ -79,6 +79,7 @@ function getUserData(gitUrl) {
       throw error;
     });
 }
+
 
 function updateProfile(data) {
   if (data.message !== "Not Found") {
@@ -114,6 +115,7 @@ function updateProfile(data) {
     noresults.style.display = "block";
   }
 }
+
 //dark mode default
 const prefersDarkMode = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
 const localStorageDarkMode = localStorage.getItem("daresfesf");
@@ -130,6 +132,7 @@ if (localStorageDarkMode) {
   lightModeProperties();
 }
 
+// dark mode properties change gloable variable data in css variable
 function darkModeProperties() {
   root.setProperty("--lm-bg", "#141D2F");
   root.setProperty("--lm-bg-content", "#1E2A47");
@@ -142,6 +145,8 @@ function darkModeProperties() {
   darkMode = true;
   localStorage.setItem("dark-mode", true);
 }
+
+// light mode properties change global variable data in css variable
 function lightModeProperties() {
   root.setProperty("--lm-bg", "#F6F8FF");
   root.setProperty("--lm-bg-content", "#FEFEFE");
